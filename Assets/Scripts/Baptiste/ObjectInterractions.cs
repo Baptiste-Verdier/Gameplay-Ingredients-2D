@@ -31,6 +31,7 @@ public class ObjectInterractions : MonoBehaviour
         {
             LoweringBridge();
             lever.GetComponent<SpriteRenderer>().sprite = turnedHandle;
+            InteractionUI.Instance.HideInteraction();
         }
     }
 
@@ -53,6 +54,14 @@ public class ObjectInterractions : MonoBehaviour
       if ( collision.CompareTag("Lever"))
         {
             nearLever = true;
+            if (PlayerInventory.Instance.IsInInventory("LEVERHANDLE") == true)
+            {
+                InteractionUI.Instance.ShowInteraction("Press Z to INTERACT");
+            }
+            else
+            {
+                InteractionUI.Instance.ShowInteraction("This lever is BROKEN");
+            }
         }
 
     }
@@ -61,7 +70,8 @@ public class ObjectInterractions : MonoBehaviour
         if(collision.CompareTag("Lever"))
         {
             nearLever = false;
+            InteractionUI.Instance.HideInteraction();
         }
     }
-    
+
 }
