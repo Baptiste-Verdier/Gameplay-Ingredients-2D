@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
     private Animator _animator;
     private SpriteRenderer _spriteRenderer;
     private SoundPlayer _audioPlayer;
+  
 
     private LayerMask voidLayer;
     private Collider2D _holeCollider;
@@ -59,6 +60,7 @@ public class PlayerMovement : MonoBehaviour
             _animator.SetBool("Jump", true);
             _audioPlayer.PlayAudio(SoundFX.Jump);
         }
+       
         
     }
 
