@@ -1,17 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.IO.LowLevel.Unsafe;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class ObjectInterractions : MonoBehaviour
 {
     private GameObject bridge;
     private GameObject lever;
+    private GameObject endFlag;
     public Sprite fixedHandle;
     public Sprite turnedHandle;
 
     private bool handleFixed = false;
-    private bool nearLever = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,12 +20,12 @@ public class ObjectInterractions : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.W) && nearLever == true && handleFixed == false && PlayerInventory.Instance.IsInInventory("LEVERHANDLE") == true)
+        if (Input.GetKeyDown(KeyCode.W)  && handleFixed == false && PlayerInventory.Instance.IsInInventory("LEVERHANDLE") == true)
         { 
             FixingHandle();
             PlayerInventory.Instance.RemoveItemFromInventory("LEVERHANDLE");
         }
-      else if (Input.GetKeyDown(KeyCode.W) && nearLever == true && handleFixed == true)
+      else if (Input.GetKeyDown(KeyCode.W) && handleFixed == true)
         {
             LoweringBridge();
             lever.GetComponent<SpriteRenderer>().sprite = turnedHandle;
@@ -53,23 +51,36 @@ public class ObjectInterractions : MonoBehaviour
     {
       if ( collision.CompareTag("Lever"))
         {
-            nearLever = true;
+          
             if (PlayerInventory.Instance.IsInInventory("LEVERHANDLE") == true)
             {
                 InteractionUI.Instance.ShowInteraction("Press Z to INTERACT");
             }
-            else
+            else if (handleFixed == false) 
             {
                 InteractionUI.Instance.ShowInteraction("This lever is BROKEN");
+            }
+        }
+        if (collision.CompareTag("EndFlag"))
+        {
+            
+            if (PlayerInventory.Instance.IsInInventory("REDGEM") == true)
+            {
+                int currentScene = PlayerLife.currentScene;
+                SceneManager.LoadScene(currentScene) ;
+
+            }
+            else 
+            {
+                InteractionUI.Instance.ShowInteraction("I need the gem");
             }
         }
 
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if(collision.CompareTag("Lever"))
+        if(collision.CompareTag("Lever") || collision.CompareTag("EndFlag"))
         {
-            nearLever = false;
             InteractionUI.Instance.HideInteraction();
         }
     }
