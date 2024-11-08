@@ -77,11 +77,10 @@ public class ObjectInterractions : MonoBehaviour
             }
         }
 
-        if (collision.CompareTag("Door"))
+     if (collision.CompareTag("Door"))
         {
-            
+            DoorScript.DoorSwap();
         }
-
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
