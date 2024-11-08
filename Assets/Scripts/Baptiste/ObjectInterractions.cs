@@ -1,5 +1,6 @@
 using UnityEngine.SceneManagement;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class ObjectInterractions : MonoBehaviour
 {
@@ -13,7 +14,7 @@ public class ObjectInterractions : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -74,6 +75,11 @@ public class ObjectInterractions : MonoBehaviour
             {
                 InteractionUI.Instance.ShowInteraction("I need the gem");
             }
+        }
+
+        if (collision.CompareTag("Door"))
+        {
+            
         }
 
     }

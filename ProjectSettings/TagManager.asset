@@ -8,6 +8,8 @@ TagManager:
   - Checkpoint
   - Lever
   - EndFlag
+  - DoorForest
+  - DoorCastle
   layers:
   - Default
   - TransparentFX
