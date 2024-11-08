@@ -67,7 +67,7 @@ public class ObjectInterractions : MonoBehaviour
             if (PlayerInventory.Instance.IsInInventory("REDGEM") == true)
             {
                 int currentScene = PlayerLife.currentScene;
-                SceneManager.LoadScene(currentScene) ;
+                SceneManager.LoadScene(currentScene+1) ;
 
             }
             else 
